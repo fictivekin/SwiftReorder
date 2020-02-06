@@ -88,7 +88,7 @@ extension ReorderController {
         }
         
         let sectionIndexes = 0..<tableView.numberOfSections
-        let sectionSnapDistances = sectionIndexes.flatMap { section -> (path: IndexPath, distance: CGFloat)? in
+        let sectionSnapDistances = sectionIndexes.compactMap { section -> (path: IndexPath, distance: CGFloat)? in
             let rowsInSection = tableView.numberOfRows(inSection: section)
             
             if section > context.destinationRow.section {
@@ -126,7 +126,7 @@ extension ReorderController {
         guard let tableView = tableView else { return .zero }
         
         let sectionRect = tableView.rectForHeader(inSection: section)
-        return UIEdgeInsetsInsetRect(sectionRect, UIEdgeInsets(top: sectionRect.height, left: 0, bottom: 0, right: 0))
+        return sectionRect.inset(by: UIEdgeInsets(top: sectionRect.height, left: 0, bottom: 0, right: 0))
     }
     
 }
